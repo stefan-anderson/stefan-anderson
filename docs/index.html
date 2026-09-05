@@ -69,7 +69,7 @@ function draw() {
   ctx.fillStyle = "#f2d675";
   for (let i = 0; i < text.length; i++) {
     const char = text[i];
-    const charX = textX + i * 30;
+    const charX = textX + i * 40;
     const charY = h / 2 + Math.sin(charX * frequency) * amplitude;
     ctx.fillText(char, charX, charY);
   }
