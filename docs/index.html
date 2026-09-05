@@ -78,7 +78,9 @@ function draw() {
 
   requestAnimationFrame(draw);
 }
-draw();
+document.fonts.load("48px Exo 2").then(() => {
+    draw();
+});
 </script>
 </body>
 </html>
