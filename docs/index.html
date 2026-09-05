@@ -29,9 +29,9 @@ resize();
 
 // Tre lager stjärnor
 const layers = [
-  { count: 100, color: '#f2d675', speed: 0.2, size: 1 },
+  { count: 100, color: '#f2d675', speed: 0.1, size: 1 },
   { count: 80, color: '#d8c27a', speed: 0.5, size: 2 },
-  { count: 60, color: '#fff2b0', speed: 0.8, size: 3 }
+  { count: 60, color: '#fff2b0', speed: 1.0, size: 3 }
 ];
 for (const layer of layers) {
   layer.stars = Array.from({length: layer.count}, () => ({
@@ -43,8 +43,8 @@ for (const layer of layers) {
 // Sinus-scroll för namn
 const text = "Stefan Anderson";
 let textX = w;
-const amplitude = 2000;
-const frequency = 0.005;
+const amplitude = 200;
+const frequency = 0.01;
 const textSpeed = 10;
 
 function draw() {
