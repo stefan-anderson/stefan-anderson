@@ -1,16 +1,64 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-    <meta charset="UTF-8">
-    <title>Test</title>
-    <style>
-        body {
-            background: #111;
-            color: #eee;
-            font-family: sans-serif;
-        }
-    </style>
+<meta charset="UTF-8">
+<title></title>
+<style>
+  body {
+    margin: 0;
+    background: #000;
+    overflow: hidden;
+  }
+  canvas {
+    display: block;
+  }
+</style>
 </head>
 <body>
+<canvas id="stars"></canvas>
+<script>
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+let w, h;
+function resize() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+// Tre lager med olika hastighet och storlek
+const layers = [
+  { count: 100, color: '#f2d675', speed: 0.2, size: 1 },
+  { count: 80, color: '#d8c27a', speed: 0.5, size: 2 },
+  { count: 60, color: '#fff2b0', speed: 0.8, size: 3 }
+];
+
+// Skapa stjärnor per lager
+for (const layer of layers) {
+  layer.stars = Array.from({length: layer.count}, () => ({
+    x: Math.random() * w,
+    y: Math.random() * h
+  }));
+}
+
+function draw() {
+  ctx.fillStyle = '#000';
+  ctx.fillRect(0, 0, w, h);
+  for (const layer of layers) {
+    ctx.fillStyle = layer.color;
+    for (const s of layer.stars) {
+      s.x -= layer.speed;
+      if (s.x < 0) s.x = w;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, layer.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
 </body>
 </html>
+>
