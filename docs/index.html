@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Stefan Anderson</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 <style>
   body {
     margin: 0;
@@ -30,8 +31,8 @@ resize();
 // Tre lager stjärnor
 const layers = [
   { count: 100, color: '#f2d675', speed: 0.1, size: 1 },
-  { count: 80, color: '#d8c27a', speed: 0.5, size: 2 },
-  { count: 60, color: '#fff2b0', speed: 1.0, size: 3 }
+  { count: 80, color: '#d8c27a', speed: 0.5, size: 1.5 },
+  { count: 60, color: '#fff2b0', speed: 2.5, size: 2 }
 ];
 for (const layer of layers) {
   layer.stars = Array.from({length: layer.count}, () => ({
@@ -43,9 +44,9 @@ for (const layer of layers) {
 // Sinus-scroll för namn
 const text = "Stefan Anderson";
 let textX = w;
-const amplitude = 100;
+const amplitude = 150;
 const frequency = 0.005;
-const textSpeed = 3;
+const textSpeed = 4;
 
 function draw() {
   ctx.fillStyle = '#000';
@@ -64,7 +65,7 @@ function draw() {
   }
 
   // Rita namn ovanpå
-  ctx.font = "48px serif";
+  ctx.font = "48px Orbitron";
   ctx.fillStyle = "#f2d675";
   for (let i = 0; i < text.length; i++) {
     const char = text[i];
