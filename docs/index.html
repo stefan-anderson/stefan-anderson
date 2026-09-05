@@ -2,7 +2,7 @@
 <html lang="sv">
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>Stefan Anderson</title>
 <style>
   body {
     margin: 0;
@@ -15,9 +15,9 @@
 </style>
 </head>
 <body>
-<canvas id="stars"></canvas>
+<canvas id="space"></canvas>
 <script>
-const canvas = document.getElementById('stars');
+const canvas = document.getElementById('space');
 const ctx = canvas.getContext('2d');
 let w, h;
 function resize() {
@@ -27,14 +27,12 @@ function resize() {
 window.addEventListener('resize', resize);
 resize();
 
-// Tre lager med olika hastighet och storlek
+// Tre lager stjärnor
 const layers = [
   { count: 100, color: '#f2d675', speed: 0.2, size: 1 },
   { count: 80, color: '#d8c27a', speed: 0.5, size: 2 },
   { count: 60, color: '#fff2b0', speed: 0.8, size: 3 }
 ];
-
-// Skapa stjärnor per lager
 for (const layer of layers) {
   layer.stars = Array.from({length: layer.count}, () => ({
     x: Math.random() * w,
@@ -42,9 +40,18 @@ for (const layer of layers) {
   }));
 }
 
+// Sinus-scroll för namn
+const text = "Stefan Anderson";
+let textX = w;
+const amplitude = 60;
+const frequency = 0.01;
+const textSpeed = 2;
+
 function draw() {
   ctx.fillStyle = '#000';
   ctx.fillRect(0, 0, w, h);
+
+  // Rita stjärnor
   for (const layer of layers) {
     ctx.fillStyle = layer.color;
     for (const s of layer.stars) {
@@ -55,10 +62,22 @@ function draw() {
       ctx.fill();
     }
   }
+
+  // Rita namn ovanpå
+  ctx.font = "48px serif";
+  ctx.fillStyle = "#f2d675";
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+    const charX = textX + i * 30;
+    const charY = h / 2 + Math.sin(charX * frequency) * amplitude;
+    ctx.fillText(char, charX, charY);
+  }
+  textX -= textSpeed;
+  if (textX + text.length * 30 < 0) textX = w;
+
   requestAnimationFrame(draw);
 }
 draw();
 </script>
 </body>
 </html>
->
